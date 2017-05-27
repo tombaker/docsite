@@ -1,6 +1,9 @@
 $(document).ready(function () {
     var AFFIX_TOP_LIMIT = 300;
     var AFFIX_OFFSET = 49;
+        aOffset = AFFIX_OFFSET
+        lastScroll = 0,
+        scrollDirection = "down";
 
     var $menu = $("#menu"),
 		$btn = $("#menu-toggle");
@@ -53,6 +56,24 @@ $(document).ready(function () {
 		    	height = $affixNav.outerHeight(),
 		    	max_bottom = $container.offset().top + $container.outerHeight(),
 		    	bottom = top + height + AFFIX_OFFSET;
+                $current = getClosestHeader(top),
+                thisScroll = $(this).scrollTop();
+            if (thisScroll > lastScroll) {
+                scrollDirection = "down";
+            }
+            else {
+                if (($current.position().top > window.innerHeight - 100) && (scrollDirection == "down")) {
+                    aOffset = aOffset - 2;
+                }
+                else if (aOffset < AFFIX_OFFSET) {
+                    aOffset += 2;
+                }
+                else {
+                    aOffset = AFFIX_OFFSET;
+                }
+                scrollDirection = "up";
+            }
+            lastScroll = thisScroll;
 
             if (affixNavfixed) {
                 if (top <= AFFIX_TOP_LIMIT) {
@@ -68,8 +89,6 @@ $(document).ready(function () {
                 $affixNav.addClass("fixed");
                 affixNavfixed = true;
             }
-
-            var $current = getClosestHeader(top);
 
             if (current !== $current) {
                 $affixNav.find(".active").removeClass("active");
