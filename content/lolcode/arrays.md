@@ -1,6 +1,6 @@
 +++
-date = "2016-05-05T08:41:21-04:00"
-draft = true
+date = "2017-05-27T09:14:39+02:00"
+draft = false
 title = "Arrays"
 categories = ["Types"]
 categories_weight = 6
