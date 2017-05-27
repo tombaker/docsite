@@ -1,51 +1,37 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 {{ partial "head.html" . }}
 <body>
 <div class="wrapper">
 <nav>
- 
   	<div class="pull-left">
-    	<h1><a href="javascript:"><img src="img/icon.png" alt="Free Documentation Template Icon" /> <span>DocWeb</span></a></h1>
+      <div class="container">
+        <h2 class="lone-header">{{ .Site.Title }}</h2>
+      </div>
     </div>
     
     <div class="pull-right">
-    	<a href="http://frittt.com/free-documentation-html-template-docweb" target="_blank" class="btn btn-download"><img src="img/download.png" width="25" alt="Download Free Documentation Template" /> Download Now</a>
     </div>
-
 </nav>
-<header>
-  <div class="container">
-    <h2 class="lone-header">Free Documentation HTML Template [ Responsive ]</h2>
-  </div>
-</header>
 <section>
   <div class="container">
     {{ partial "nav.html" . }}
     <div class="docs-content">
-      <h2> Getting Started</h2>
-      <h3 id="welcome"> Welcome</h3>
-      <ul class="docs-nav">
-          {{ range $name, $taxonomy := .Site.Taxonomies.categories }}
-          <li><strong>{{ $name | title }}</strong></li>
-          {{ range $taxonomy.Pages }}
-            {{ if ne .Title "" }}
-            <li><a href="#{{ .LinkTitle | urlize }}" class="cc-active">{{ .Title }}</a></li>
-            {{ end }}
-          {{ end }}
-          {{ end }}
-      </ul>
+      {{ range $name, $taxonomy := .Site.Taxonomies.categories }}
+          <h2>{{ $name | title }}</h2>
+        {{ range $taxonomy.Pages }}
+            <h3 id="{{ .LinkTitle | urlize }}">{{ .Title }}</h2>
+            {{ .Content }}
+            <hr>
+        {{ end }}
+      {{ end }}
     </div>
-  </div>
-</section>
-<section class="vibrant centered">
-  <div class="">
-    <h4> This documentation template is provided by <a href="http://www.frittt.com" target="_blank">Frittt Templates</a>. You can download and use this template for free. If you have used this template, please pay the developer's effort by Tweeting, sharing on Facebook, social mention or with a linkback. Enjoy! :)</h4>
   </div>
 </section>
 {{ partial "footer.html" }}
 </div>
-<script src="{{ .Site.BaseURL }}assets/js/jquery.min.js"></script> 
+<script src="{{ .Site.BaseURL }}assets/js/jquery.min.js"></script>
 <script src="{{ .Site.BaseURL }}assets/js/layout.js"></script>
 </body>
 </html>
